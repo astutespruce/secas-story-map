@@ -7,14 +7,19 @@
         <img src={Logo} height="30px" width="30px" alt="SECAS logo" />
     </a>
 
-    <h1 class="m-0 text-2xl leading-none">Southeast Conservation Adaptation Strategy Projects</h1>
+    <a href="/">
+        <h1 class="m-0 text-2xl leading-none">Southeast Conservation Adaptation Strategy Projects</h1>
+    </a>
 </header>
 
 <style>
     header {
         background-color: #4279a6;
         color: #fff;
-        /* box-shadow: 0 2px 6px #000; */
         border-bottom: 2px solid #444;
+
+        a {
+            color: #fff;
+        }
     }
 </style>

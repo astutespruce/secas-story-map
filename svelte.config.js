@@ -1,8 +1,17 @@
 import adapter from '@sveltejs/adapter-static'
+import { enhancedImages } from 'mdsvex-enhanced-images'
+import { mdsvex } from 'mdsvex'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
+
 const config = {
-    preprocess: vitePreprocess(),
+    extensions: ['.svelte', '.md'],
+    preprocess: [vitePreprocess(),
+        mdsvex({
+            extensions: ['.md'],
+            remarkPlugins: [enhancedImages],
+        }),
+    ],
 
     kit: {
         adapter: adapter({
@@ -12,6 +21,9 @@ const config = {
             precompress: false,
             strict: true,
         }),
+        alias: {
+            $projects: 'src/projects'
+        }
     },
 }
 

@@ -11,7 +11,7 @@
     :root {
         --background: 0 0% 100%;
         --foreground: 240 10% 3.9%;
-        /* --muted: 240 4.8% 95.9%;
+        --muted: 240 4.8% 95.9%;
         --muted-foreground: 240 3.8% 46.1%;
         --popover: 0 0% 100%;
         --popover-foreground: 240 10% 3.9%;
@@ -36,7 +36,7 @@
         --sidebar-accent: 240 4.8% 95.9%;
         --sidebar-accent-foreground: 240 5.9% 10%;
         --sidebar-border: 220 13% 91%;
-        --sidebar-ring: 217.2 91.2% 59.8%; */
+        --sidebar-ring: 217.2 91.2% 59.8%;
     }
 
     * {
@@ -63,6 +63,19 @@
     h4 {
         font-family: 'Raleway', sans-serif;
         font-weight: 700;
+    }
+
+    h1 {
+        @apply text-5xl font-bold md:text-6xl lg:text-7xl;
+    }
+    h2 {
+        @apply text-4xl font-bold md:text-5xl;
+    }
+    h3 {
+        @apply text-3xl font-bold md:text-4xl;
+    }
+    h4 {
+        @apply text-2xl font-bold;
     }
 
     a {
