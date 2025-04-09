@@ -1,6 +1,7 @@
 import adapter from '@sveltejs/adapter-static'
 import { enhancedImages } from 'mdsvex-enhanced-images'
 import { mdsvex } from 'mdsvex'
+import rehypeExternalLinks from 'rehype-external-links'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 
@@ -10,6 +11,7 @@ const config = {
         mdsvex({
             extensions: ['.md'],
             remarkPlugins: [enhancedImages],
+            rehypePlugins: [[rehypeExternalLinks, {target: '_blank'}]]
         }),
     ],
 

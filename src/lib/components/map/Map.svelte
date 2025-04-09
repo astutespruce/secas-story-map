@@ -4,56 +4,17 @@
     import 'maplibre-gl/dist/maplibre-gl.css'
     import { Protocol } from 'pmtiles'
 
+    import { bounds, style } from './config'
     import { getCenterAndZoom } from './viewport'
+
+    const { projects, onMarkerClick } = $props()
 
     let protocol = new Protocol()
     maplibre.addProtocol('pmtiles', protocol.tile)
 
-    const bounds: [number, number, number, number] = [
-        -106.93611462308955, 14.65662961734786, -48.85555906753385, 43.47207027673693,
-    ]
-
-    const style: maplibre.StyleSpecification = {
-        version: 8,
-        sources: {
-            osm: {
-                type: 'raster',
-                tiles: ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'],
-                tileSize: 256,
-                attribution: '&copy; OpenStreetMap Contributors',
-                maxzoom: 19,
-            },
-            local: {
-                type: 'vector',
-                url: `pmtiles://${window.location.protocol}//${window.location.host}/tiles.pmtiles`,
-            },
-        },
-        layers: [
-            {
-                id: 'osm',
-                type: 'raster',
-                source: 'osm', // This must match the source key above
-            },
-            {
-                id: 'boundary',
-                type: 'line',
-                source: 'local',
-                'source-layer': 'boundary',
-                paint: {
-                    'line-color': '#000',
-                    'line-width': {
-                        stops: [
-                            [6, 1],
-                            [8, 0.1],
-                        ],
-                    },
-                },
-            },
-        ],
-    }
-
     let mapContainer: HTMLDivElement
     let map: maplibre.Map
+    const markers = {}
 
     onMount(() => {
         const { center, zoom } = getCenterAndZoom(mapContainer, bounds, 0)
@@ -65,17 +26,42 @@
             zoom,
         })
 
+        // @ts-ignore
         window.map = map
 
         map.on('load', () => {
-            // TODO:
-            // Object.entries(sources).forEach(([key, source]) => {
-            // 	map.addSource(key, source)
-            // })
-            // layers.forEach((layer) => {
-            // 	map.addLayer(layer)
-            // })
+            // TODO: add boundaries into layer
+            projects.forEach(({ id, title, latitude, longitude }) => {
+                const marker = new maplibre.Marker()
+                    .setLngLat([longitude, latitude])
+                    // .setPopup(new maplibre.Popup({ closeButton: false }).setHTML(title))
+                    .addTo(map)
+
+                marker.getElement().addEventListener('click', (e) => {
+                    e.stopPropagation()
+                    onMarkerClick(id)
+                })
+
+                const element = marker.getElement()
+                const g = element
+                    .getElementsByTagName('svg')[0]
+                    .getElementsByTagName('g')[0]
+                    .getElementsByTagName('g')[1]
+
+                marker.getElement().addEventListener('mouseenter', () => {
+                    g.setAttribute('fill', 'purple')
+                })
+
+                marker.getElement().addEventListener('mouseleave', () => {
+                    g.setAttribute('fill', '#3FB1CE')
+                })
+
+                markers[id] = marker
+            })
         })
+
+        // FIXME: remove
+        window.markers = markers
     })
 
     onDestroy(() => {
@@ -87,6 +73,6 @@
     })
 </script>
 
-<div class="flex-auto h-full w-full relative">
+<div class="flex-auto h-full w-full relative map">
     <div class="h-full w-full absolute" bind:this={mapContainer}></div>
 </div>

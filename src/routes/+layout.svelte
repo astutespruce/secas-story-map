@@ -1,7 +1,6 @@
 <script lang="ts">
     import raleway from '@fontsource/raleway/files/raleway-latin-700-normal.woff2?url'
     import sourceSansPro from '@fontsource/source-sans-pro/files/source-sans-pro-latin-400-normal.woff2?url'
-    // import Logo from '$lib/assets/SECAS_logo.svg
 
     import '../app.css'
 

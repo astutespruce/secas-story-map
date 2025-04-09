@@ -16,9 +16,12 @@ export type Project = {
     latitude: number
     longitude: number
 
+    photo: string
+    photo_caption: string
+    photo_url?: string | null | undefined
 
     // from markdown content
-    description: string
+    content: any
 
     // added dynamically based on path
     id: string

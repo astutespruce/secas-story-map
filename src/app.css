@@ -85,4 +85,11 @@
         }
     }
 
+    .markdown-content {
+        p  {
+            margin-top: 1rem;
+            @apply text-lg leading-snug;
+        }
+    }
+
 }
