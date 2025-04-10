@@ -1,8 +1,6 @@
 import type {StyleSpecification} from 'mapbox-gl'
 
-export const bounds: [number, number, number, number] = [
-    -106.93611462308955, 14.65662961734786, -48.85555906753385, 43.47207027673693,
-]
+export const bounds: [number, number, number, number] = [-106.64569497,   17.63478139,  -64.44293322,   40.63868947]
 
 export const style: StyleSpecification = {
     version: 8,
