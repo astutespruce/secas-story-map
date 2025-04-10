@@ -133,7 +133,7 @@
     })
 </script>
 
-<div class="left-[264px] top-0 bottom-0 right-0 absolute map z-[0]" class:has-selected-project={!!selectedProject}>
+<div class="flex-auto w-full h-full relative map" class:has-selected-project={!!selectedProject}>
     <div class="h-full w-full absolute" bind:this={mapContainer}></div>
     <button
         class="absolute top-[75px] right-[10px] z-[1000] bg-white leading-none rounded-[4px] p-[2px]"

@@ -45,10 +45,9 @@
     <meta name="description" content="A story map of conservation projects." />
 </svelte:head>
 
-<main class="gap-0 h-full w-full relative">
+<main class="flex gap-0 h-full w-full relative">
     <div
-        class="border-r-2 border-zinc-200 overflow-y-auto absolute z-[100] left-0 top-0 bottom-0 bg-white"
-        style={`width: ${selectedProject ? '440px' : '264px'};`}
+        class="flex-none w-[440px] border-r-2 border-zinc-200 overflow-y-auto z-[100] bg-white"
         bind:this={sidebarNode}
     >
         {#if selectedProject}
