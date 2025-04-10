@@ -1,4 +1,4 @@
-import ProjectList from './ProjectList.svelte'
 import ProjectDetails from './ProjectDetails.svelte'
+import ProjectList from './ProjectList.svelte'
 
-export {ProjectList, ProjectDetails}
+export {ProjectDetails, ProjectList}

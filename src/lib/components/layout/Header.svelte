@@ -2,7 +2,7 @@
     import Logo from '$lib/assets/SECAS_logo.svg'
 </script>
 
-<header class="flex flex-none items-center gap-3 py-2 px-2 leading-none">
+<header class="flex flex-none items-center gap-3 py-2 px-2 leading-none border-b-2 border-zinc-600">
     <a href="https://secassoutheast.org/" target="_blank" class="text-foreground hover:no-underline">
         <img src={Logo} height="30px" width="30px" alt="SECAS logo" />
     </a>
@@ -16,7 +16,7 @@
     header {
         background-color: #4279a6;
         color: #fff;
-        border-bottom: 2px solid #444;
+        /* border-bottom: 2px solid #444; */
 
         a {
             color: #fff;

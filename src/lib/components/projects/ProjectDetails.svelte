@@ -1,20 +1,25 @@
 <script lang="ts">
-    import { ChevronsLeft } from '@lucide/svelte'
+    import { CircleX } from '@lucide/svelte'
 
     const { title, content, photo, photo_caption, photo_url, onClose } = $props()
 </script>
 
 <div class="relative flex flex-col">
-    <div class="bg-zinc-100 py-2 px-4 flex-none">
-        <button onclick={onClose} class="flex items-center leading-none gap-1 text-blue-600">
-            <ChevronsLeft size="1.25em" />
-
-            see all projects
-        </button>
-    </div>
     <div class="pt-4 pb-8 px-4">
-        <div class="text-xl font-bold leading-tight">
-            {title}
+        <div class="flex justify-between gap-4">
+            <div class="flex-auto text-xl font-bold leading-tight">
+                {title}
+            </div>
+            <div class="flex-none">
+                <button
+                    onclick={onClose}
+                    class="text-zinc-400 hover:text-foreground mt-1"
+                    tabindex="0"
+                    title="close project"
+                >
+                    <CircleX size="1.5em" />
+                </button>
+            </div>
         </div>
 
         <div class="mt-4">

@@ -102,6 +102,8 @@
             return
         }
 
+        map.resize()
+
         const updateVisibleProject = () => {
             if (selectedProject) {
                 const { id, bounds: projectBounds, boundary: projectBoundary } = selectedProject
@@ -138,7 +140,9 @@
     <button
         class="absolute top-[75px] right-[10px] z-[1000] bg-white leading-none rounded-[4px] p-[2px]"
         style="border: 1px solid #ddd;box-shadow: 0 0 0 1px rgba(0,0,0,.1);"
+        tabindex="0"
         onclick={zoomFullExtent}
+        title="zoom to full extent"
     >
         <Expand />
     </button>
