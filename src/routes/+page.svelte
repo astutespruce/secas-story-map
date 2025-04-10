@@ -3,7 +3,6 @@
     import { goto } from '$app/navigation'
 
     import type { Project } from '$lib/components/projects/types'
-    import { Sidebar } from '$lib/components/layout'
     import { Map } from '$lib/components/map'
     import { ProjectList, ProjectDetails } from '$lib/components/projects'
     import Logo from '$lib/assets/SECAS_logo_words.svg'
@@ -11,10 +10,18 @@
     const { data } = $props()
     const { projects, projectIndex } = data
 
-    let selectedProject: Project | null = $state(null)
+    let selectedProject: Project | null = $state(
+        window.location.hash ? projectIndex[window.location.hash.slice(1)] : null
+    )
+    let sidebarNode: Element
 
     const setProject = (id: String | null) => {
         selectedProject = id === null ? null : projectIndex[id]
+
+        // scroll sidebar to top on change of content
+        if (sidebarNode) {
+            sidebarNode.scrollTo({ top: 0, behavior: 'auto' })
+        }
     }
 
     const openProject = (id: String) => {
@@ -38,8 +45,12 @@
     <meta name="description" content="A story map of conservation projects." />
 </svelte:head>
 
-<main class="flex gap-0 h-full w-full">
-    <Sidebar>
+<main class="gap-0 h-full w-full relative">
+    <div
+        class="border-r-2 border-zinc-200 overflow-y-auto absolute z-[100] left-0 top-0 bottom-0 bg-white"
+        style={`width: ${selectedProject ? '440px' : '264px'};`}
+        bind:this={sidebarNode}
+    >
         {#if selectedProject}
             <ProjectDetails {...selectedProject} onClose={closeProject} />
         {:else}
@@ -57,6 +68,6 @@
                 </div>
             </div>
         {/if}
-    </Sidebar>
-    <Map {projects} onMarkerClick={openProject} />
+    </div>
+    <Map {projects} {selectedProject} onMarkerClick={openProject} />
 </main>

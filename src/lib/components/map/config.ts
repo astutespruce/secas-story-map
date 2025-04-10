@@ -18,12 +18,38 @@ export const style: StyleSpecification = {
             type: 'vector',
             url: `pmtiles://${window.location.protocol}//${window.location.host}/tiles.pmtiles`,
         },
+        projects: {
+            type: 'geojson',
+            data: null
+        }
     },
     layers: [
         {
             id: 'osm',
             type: 'raster',
             source: 'osm',
+        },
+
+        {
+            id: 'projects-fill',
+            source: 'projects',
+            type: 'fill',
+            filter: ['==', 'id', Infinity],
+            paint: {
+                'fill-color': 'orange',
+                'fill-opacity': 0.25,
+            }
+        },
+        {
+            id: 'projects-outline',
+            source: 'projects',
+            type: 'line',
+            filter: ['==', 'id', Infinity],
+
+            paint: {
+                'line-color': 'orange',
+                'line-width': 2
+            }
         },
         {
             id: 'boundary',

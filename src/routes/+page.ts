@@ -1,3 +1,5 @@
+import { bbox } from "@turf/bbox";
+
 import type { Project } from '$lib/components/projects/types'
 
 import {indexBy} from '$lib/util/data'
@@ -24,7 +26,8 @@ export const load = () => {
                 id,
                 date: new Date(metadata.date),
                 photo: images[imageKey],
-                boundary: boundaries[boundaryKey]
+                boundary: boundaries[boundaryKey],
+                bounds: bbox(boundaries[boundaryKey])
             })
         }
     }
@@ -32,5 +35,8 @@ export const load = () => {
     // sort by date
     projects.sort(({date: a}, {date: b}) => a>b ? -1 : 1)
 
+
+    //FIXME:
+    console.log('projects', projects)
     return {projects, projectIndex: indexBy(projects, "id")}
 }

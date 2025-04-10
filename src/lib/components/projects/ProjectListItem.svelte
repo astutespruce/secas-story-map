@@ -7,13 +7,13 @@
 
 <a
     href={`#${id}`}
-    class="flex cursor-pointer hover:bg-zinc-100 py-4 px-4 border-b border-zinc-300 gap-4 hover:no-underline"
+    class="cursor-pointer hover:bg-zinc-100 py-4 px-4 border-b border-zinc-300 gap-4 hover:no-underline block"
 >
-    <div class="flex-auto">
+    <div>
         <div class="font-bold leading-tight text-foreground">{title}</div>
         <div class="text-muted-foreground text-sm">{date.toLocaleDateString()}</div>
     </div>
-    <div class="flex-none w-[100px]">
+    <div>
         <img src={photo} alt={caption_text} class="border border-zinc-300 w-full border border-zinc-300" />
     </div>
 </a>
