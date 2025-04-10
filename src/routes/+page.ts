@@ -36,7 +36,5 @@ export const load = () => {
     projects.sort(({date: a}, {date: b}) => a>b ? -1 : 1)
 
 
-    //FIXME:
-    console.log('projects', projects)
     return {projects, projectIndex: indexBy(projects, "id")}
 }

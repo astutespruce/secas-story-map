@@ -56,16 +56,12 @@
         {:else}
             <ProjectList {projects} onSelectProject={setProject} />
 
-            <div class="flex gap-4 py-6 px-4">
-                <img src={Logo} height="54px" width="41px" alt="SECAS logo" />
-                <div class="text-md">
-                    Southeast Conservation Adaptation Strategy (SECAS). 2025. <a
-                        href="https://secassoutheast.org/"
-                        target="_blank"
-                    >
-                        https://secassoutheast.org/
-                    </a>
+            <div class="py-6 px-4">
+                <div class="flex gap-4">
+                    <img src={Logo} height="54px" width="41px" alt="SECAS logo" class="block" />
+                    <div class="text-md">Southeast Conservation Adaptation Strategy (SECAS). 2025.</div>
                 </div>
+                <a href="https://secassoutheast.org/" target="_blank"> https://secassoutheast.org/ </a>
             </div>
         {/if}
     </div>

@@ -1,19 +1,19 @@
 <script lang="ts">
+    import { Expand } from '@lucide/svelte'
     import { onMount, onDestroy } from 'svelte'
-    import maplibre from 'maplibre-gl'
-    import 'maplibre-gl/dist/maplibre-gl.css'
-    import { Protocol } from 'pmtiles'
 
     import { bounds, style } from './config'
+    import { mapboxgl } from './mapbox'
+    import { PMTilesSource } from './pmtiles'
     import { getCenterAndZoom } from './viewport'
+
+    // enable PMTiles source
+    mapboxgl.Style.setSourceType(PMTilesSource.SOURCE_TYPE, PMTilesSource)
 
     const { projects, selectedProject, onMarkerClick } = $props()
 
-    let protocol = new Protocol()
-    maplibre.addProtocol('pmtiles', protocol.tile)
-
     let mapContainer: HTMLDivElement
-    let map: maplibre.Map
+    let map: mapboxgl.Map
     let southeast: { center: [number, number]; zoom: number }
 
     style.sources.projects.data = {
@@ -30,20 +30,44 @@
     onMount(() => {
         southeast = getCenterAndZoom(mapContainer, bounds, 0)
 
-        map = new maplibre.Map({
+        map = new mapboxgl.Map({
             container: mapContainer,
-            style,
+            style: 'mapbox://styles/mapbox/light-v9',
             ...(selectedProject ? getCenterAndZoom(mapContainer, selectedProject.bounds, 0.05) : southeast),
         })
+
+        map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right')
 
         // @ts-ignore
         window.map = map
 
+        map.once('style.load', () => {
+            // hide Gulf of Mexico per US federal requirements (2025)
+            if (map.style._layers['marine-label-md-pt']) {
+                map.setFilter('marine-label-md-pt', [
+                    'all',
+                    ['==', '$type', 'Point'],
+                    ['in', 'labelrank', 2, 3],
+                    ['!=', 'name', 'Gulf of Mexico'],
+                ])
+            }
+        })
+
         map.on('load', () => {
+            // add sources
+            Object.entries(style.sources).forEach(([id, source]) => {
+                map.addSource(id, source)
+            })
+
+            style.layers.forEach((layer) => {
+                map.addLayer(layer)
+            })
+
+            // add marker for each project
             projects.forEach(({ id, title, latitude, longitude }) => {
-                const marker = new maplibre.Marker()
+                const marker = new mapboxgl.Marker()
                     .setLngLat([longitude, latitude])
-                    .setPopup(new maplibre.Popup({ closeButton: false }).setHTML(title))
+                    .setPopup(new mapboxgl.Popup({ closeButton: false }).setHTML(title))
                     .addTo(map)
 
                 if (selectedProject && selectedProject.id === id) {
@@ -98,9 +122,11 @@
         }
     })
 
-    onDestroy(() => {
-        maplibre.removeProtocol('pmtiles')
+    const zoomFullExtent = () => {
+        map.flyTo({ ...southeast })
+    }
 
+    onDestroy(() => {
         if (map) {
             map.remove()
         }
@@ -109,31 +135,34 @@
 
 <div class="left-[264px] top-0 bottom-0 right-0 absolute map z-[0]" class:has-selected-project={!!selectedProject}>
     <div class="h-full w-full absolute" bind:this={mapContainer}></div>
+    <button
+        class="absolute top-[75px] right-[10px] z-[1000] bg-white leading-none rounded-[4px] p-[2px]"
+        style="border: 1px solid #ddd;box-shadow: 0 0 0 1px rgba(0,0,0,.1);"
+        onclick={zoomFullExtent}
+    >
+        <Expand />
+    </button>
 </div>
 
 <style>
     /* highlight marker on hover; have to use global to prevent unused CSS from being removed */
-    :global(
-        .maplibregl-marker:hover svg > g > g:nth-child(2),
-        .maplibregl-marker.visited:hover svg > g > g:nth-child(2)
-    ) {
+    :global(.mapboxgl-marker:hover svg > path:first-of-type, .mapboxgl-marker.visited:hover svg > path:first-of-type) {
         fill: orange;
     }
 
-    :global(.maplibregl-marker.visited svg > g > g:nth-child(2)) {
+    :global(.mapboxgl-marker.visited svg > path:first-of-type) {
         fill: purple;
     }
 
-    :global(.has-selected-project .maplibregl-marker) {
+    :global(.has-selected-project .mapboxgl-marker) {
         display: none;
     }
 
     /* make popup contents match regular paragraph styling */
-    :global(.maplibregl-popup-content) {
+    :global(.mapboxgl-popup-content) {
         font-family: 'Source Sans Pro', sans-serif;
         font-size: 1rem;
         line-height: 1.1;
         padding: 0.5rem;
-        border: 1px solid #000;
     }
 </style>
