@@ -106,14 +106,24 @@
 
         const updateVisibleProject = () => {
             if (selectedProject) {
-                const { id, bounds: projectBounds, boundary: projectBoundary } = selectedProject
-                map.flyTo({ ...getCenterAndZoom(mapContainer, selectedProject.bounds, 0.05) })
-                map.setFilter('projects-outline', ['==', 'id', id])
-                map.setFilter('projects-fill', ['==', 'id', id])
+                const { id, bounds: projectBounds, boundary: projectBoundary, states } = selectedProject
+                if (projectBounds) {
+                    map.flyTo({ ...getCenterAndZoom(mapContainer, selectedProject.bounds, 0.05) })
+                }
+
+                if (projectBoundary) {
+                    map.setFilter('projects-outline', ['==', 'id', id])
+                    map.setFilter('projects-fill', ['==', 'id', id])
+                } else if (states) {
+                    map.setFilter('states-outline', ['in', 'id', ...states])
+                    map.setFilter('states-fill', ['in', 'id', ...states])
+                }
             } else {
                 map.flyTo({ ...southeast })
                 map.setFilter('projects-outline', ['==', 'id', Infinity])
                 map.setFilter('projects-fill', ['==', 'id', Infinity])
+                map.setFilter('states-outline', ['==', 'id', Infinity])
+                map.setFilter('states-fill', ['==', 'id', Infinity])
             }
         }
 
@@ -135,10 +145,10 @@
     })
 </script>
 
-<div class="flex-auto w-full h-full relative map" class:has-selected-project={!!selectedProject}>
-    <div class="h-full w-full absolute" bind:this={mapContainer}></div>
+<div class="map relative h-full w-full flex-auto" class:has-selected-project={!!selectedProject}>
+    <div class="absolute h-full w-full" bind:this={mapContainer}></div>
     <button
-        class="absolute top-[75px] right-[10px] z-[1000] bg-white leading-none rounded-[4px] p-[2px]"
+        class="absolute right-[10px] top-[75px] z-[1000] rounded-[4px] bg-white p-[2px] leading-none"
         style="border: 1px solid #ddd;box-shadow: 0 0 0 1px rgba(0,0,0,.1);"
         tabindex="0"
         onclick={zoomFullExtent}

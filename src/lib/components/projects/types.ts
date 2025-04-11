@@ -8,21 +8,27 @@ type Banner = {
 }
 
 export type Project = {
-    // from frontmatter
+    // added dynamically based on path
+    id: string
+
+    // from project.md frontmatter
     title: string
     summary: string
     date: string
     banner: Banner
     latitude: number
     longitude: number
-
-    photo: string
+    states?: string[]
+    bounds?: number[] // calculated automatically from boundary
     photo_caption: string
     photo_url?: string | null | undefined
 
-    // from markdown content
+    // from project.md content
     content: any
 
-    // added dynamically based on path
-    id: string
+    // from associated banner.jpg
+    photo: string
+
+    // from associated boundary.json (OPTIONAL)
+    boundary?: string
 }
