@@ -1,6 +1,6 @@
 # SECAS Story Map
 
-https://secassoutheast.org/story-map
+[https://secassoutheast.org/story-map](https://secassoutheast.org/story-map)
 
 This interactive story map highlights several conservation projects that fall under the Southeast Conservation Adaptation Strategy (SECAS).
 

@@ -3,8 +3,6 @@ id: usfs_r8
 title: 'The U.S Forest Service uses the Blueprint to prioritize regional efforts'
 latitude: 34.78
 longitude: -94.901
-states: ['AL', 'AR', 'FL', 'GA', 'KY', 'LA', 'MS', 'NC', 'OK', 'PR', 'SC', 'TN', 'TX', 'VA', 'VI']
-bounds: [-106.645646, 17.623468, -64.512674, 39.466012]
 date: 08/13/2024
 location: 'point - Panorama Vista on Google Maps; polygon - USFS R8 boundary'
 photo_caption: 'Talimena National Scenic Byway in Ouachita National Forest, OK. Photo: Alex Butterfield/Flickr, CC BY 2.0.'
