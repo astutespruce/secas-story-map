@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { Expand } from '@lucide/svelte'
     import { onMount, onDestroy } from 'svelte'
 
     import { bounds, style } from './config'
@@ -54,6 +53,24 @@
         })
 
         map.on('load', () => {
+            // add fallback content for canvas
+            map._canvas.setAttribute('aria-label', 'interactive map showing SECAS project locations')
+
+            // add full extent button manually so it has proper tab order
+            const button = document.createElement('button')
+            button.onclick = zoomFullExtent
+            button.classList =
+                'absolute right-[10px] top-[75px] z-[1000] rounded-[4px] bg-white p-[2px] leading-none w-[29px] h-[29px]'
+            button.style = 'border: 1px solid #ddd;box-shadow:0 0 0 2px rgba(0,0,0,.1);'
+            button.title = 'zoom to full extent'
+            button.tabIndex = 0
+            document.querySelector('.mapboxgl-ctrl-top-right')?.appendChild(button)
+
+            const span = document.createElement('span')
+            span.style =
+                'display:block;height:100%;width:100%;background-position:50%;background-repeat:no-repeat;background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWV4cGFuZC1pY29uIGx1Y2lkZS1leHBhbmQiPjxwYXRoIGQ9Im0xNSAxNSA2IDYiLz48cGF0aCBkPSJtMTUgOSA2LTYiLz48cGF0aCBkPSJNMjEgMTYuMlYyMWgtNC44Ii8+PHBhdGggZD0iTTIxIDcuOFYzaC00LjgiLz48cGF0aCBkPSJNMyAxNi4yVjIxaDQuOCIvPjxwYXRoIGQ9Im0zIDIxIDYtNiIvPjxwYXRoIGQ9Ik0zIDcuOFYzaDQuOCIvPjxwYXRoIGQ9Ik05IDkgMyAzIi8+PC9zdmc+);'
+            button.appendChild(span)
+
             // add sources
             Object.entries(style.sources).forEach(([id, source]) => {
                 map.addSource(id, source)
@@ -75,6 +92,7 @@
                 }
 
                 const element = marker.getElement()
+                element.setAttribute('aria-label', `map marker for ${title}`)
 
                 element.addEventListener('click', (e) => {
                     e.stopPropagation()
@@ -152,7 +170,7 @@
 
 <div class="map relative h-full w-full flex-auto" class:has-selected-project={!!selectedProject}>
     <div class="absolute h-full w-full" bind:this={mapContainer}></div>
-    <button
+    <!-- <button
         class="absolute right-[10px] top-[75px] z-[1000] rounded-[4px] bg-white p-[2px] leading-none"
         style="border: 1px solid #ddd;box-shadow: 0 0 0 1px rgba(0,0,0,.1);"
         tabindex="0"
@@ -160,7 +178,7 @@
         title="zoom to full extent"
     >
         <Expand />
-    </button>
+    </button> -->
 </div>
 
 <style>
