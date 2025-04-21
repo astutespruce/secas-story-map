@@ -3,7 +3,7 @@ id: sfaps
 title: 'The Blueprint helps align state forestry and wildlife plans'
 latitude: 36.05
 longitude: -84.569
-states: ['SC', 'TN']
+boundary_ids: ['SC', 'TN']
 bounds: [-90.310491, 31.995954, -78.499301, 36.678255]
 date: 03/03/2025
 location: 'point - Lone Mtn State Forest on Google Maps; polygon - SC and TN boundaries'

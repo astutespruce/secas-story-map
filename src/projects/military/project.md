@@ -3,6 +3,8 @@ id: military
 title: 'The Blueprint supports conservation and the military mission'
 latitude: 30.585
 longitude: -86.696
+boundary_ids: ['military']
+bounds: [-91.65501805, 24.39630947, -75.40011776, 36.58816626]
 date: 08/13/2024
 location: 'point - on Eglin Air Force Base; polygon - MS, AL, GA, SC, FL, NC boundaries'
 photo_caption: 'Joint strike fighters at Eglin Air Force Base in FL. Photo: Robert Sullivan/Flickr, public domain.'

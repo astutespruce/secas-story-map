@@ -18,7 +18,7 @@ export type Project = {
     banner: Banner
     latitude: number
     longitude: number
-    states?: string[]
+    boundary_ids?: string[]
     bounds?: number[] // calculated automatically from boundary
     photo_caption: string
     photo_url?: string | null | undefined

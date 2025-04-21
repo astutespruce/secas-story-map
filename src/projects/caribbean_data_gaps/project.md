@@ -3,7 +3,7 @@ id: caribbean_data_gaps
 title: 'SECAS advocates for expanding data coverage and helps fill gaps in the U.S. Caribbean'
 latitude: 18.077
 longitude: -66.217
-states: ['PR']
+boundary_ids: ['PR']
 bounds: [-67.998751, 17.831509, -65.168503, 18.568002]
 date: 03/04/2025
 location: 'point - in newly added PAD-US land; polygon - PR boundary'

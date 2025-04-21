@@ -7,17 +7,17 @@ export const style: StyleSpecification = {
     sources: {
         boundaries: {
             type: 'pmtiles',
-            url: '/tiles.pmtiles',
+            url: '/boundaries.pmtiles',
         },
-        projects: {
+        geojson: {
             type: 'geojson',
             data: null,
         },
     },
     layers: [
         {
-            id: 'projects-fill',
-            source: 'projects',
+            id: 'geojson-fill',
+            source: 'geojson',
             type: 'fill',
             filter: ['==', 'id', Infinity],
             paint: {
@@ -26,8 +26,8 @@ export const style: StyleSpecification = {
             },
         },
         {
-            id: 'projects-outline',
-            source: 'projects',
+            id: 'geojson-outline',
+            source: 'geojson',
             type: 'line',
             filter: ['==', 'id', Infinity],
             paint: {
@@ -36,10 +36,10 @@ export const style: StyleSpecification = {
             },
         },
         {
-            id: 'states-fill',
+            id: 'boundaries-fill',
             type: 'fill',
             source: 'boundaries',
-            'source-layer': 'states',
+            'source-layer': 'boundaries',
             filter: ['==', 'id', Infinity],
             paint: {
                 'fill-color': 'orange',
@@ -47,10 +47,10 @@ export const style: StyleSpecification = {
             },
         },
         {
-            id: 'states-outline',
+            id: 'boundaries-outline',
             type: 'line',
             source: 'boundaries',
-            'source-layer': 'states',
+            'source-layer': 'boundaries',
             filter: ['==', 'id', Infinity],
             paint: {
                 'line-color': 'orange',
@@ -59,10 +59,11 @@ export const style: StyleSpecification = {
         },
 
         {
-            id: 'boundary',
+            id: 'secas-boundary',
             type: 'line',
             source: 'boundaries',
-            'source-layer': 'boundary',
+            'source-layer': 'boundaries',
+            filter: ['==', 'id', 'secas'],
             paint: {
                 'line-color': '#000',
                 'line-width': 1.5,

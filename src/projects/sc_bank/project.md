@@ -3,7 +3,7 @@ id: sc_bank
 title: 'The Blueprint helps the South Carolina Conservation Bank make a regional impact '
 latitude: 32.828
 longitude: -81.353
-states: ['SC']
+boundary_ids: ['SC']
 bounds: [-83.353928, 31.995954, -78.499301, 35.215485]
 date: 08/13/2024
 location: 'point - near Groton Plantation on Google Maps; polygon - SC boundary'

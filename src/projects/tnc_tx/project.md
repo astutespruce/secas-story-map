@@ -3,7 +3,7 @@ id: tnc_tx
 title: 'The Nature Conservancy in Texas uses the Blueprint in strategic plan'
 latitude: 29.451
 longitude: -98.473
-states: ['TX']
+boundary_ids: ['TX']
 bounds: [-106.645646, 25.837048, -93.508039, 36.500704]
 date: 03/04/2025
 location: 'point - TN TX location on Google Maps; polygon - TX boundary'

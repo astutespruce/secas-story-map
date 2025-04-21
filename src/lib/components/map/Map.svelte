@@ -16,7 +16,7 @@
     let map: mapboxgl.Map
     let southeast: { center: [number, number]; zoom: number }
 
-    style.sources.projects.data = {
+    style.sources.geojson.data = {
         type: 'FeatureCollection',
         features: projects.map(({ id, boundary }) => ({
             type: 'Feature',
@@ -106,24 +106,29 @@
 
         const updateVisibleProject = () => {
             if (selectedProject) {
-                const { id, bounds: projectBounds, boundary: projectBoundary, states } = selectedProject
+                const {
+                    id,
+                    bounds: projectBounds,
+                    boundary: projectBoundary,
+                    boundary_ids: boundaryIds,
+                } = selectedProject
                 if (projectBounds) {
                     map.flyTo({ ...getCenterAndZoom(mapContainer, selectedProject.bounds, 0.05) })
                 }
 
                 if (projectBoundary) {
-                    map.setFilter('projects-outline', ['==', 'id', id])
-                    map.setFilter('projects-fill', ['==', 'id', id])
-                } else if (states) {
-                    map.setFilter('states-outline', ['in', 'id', ...states])
-                    map.setFilter('states-fill', ['in', 'id', ...states])
+                    map.setFilter('geojson-outline', ['==', 'id', id])
+                    map.setFilter('geojson-fill', ['==', 'id', id])
+                } else if (boundaryIds) {
+                    map.setFilter('boundaries-outline', ['in', 'id', ...boundaryIds])
+                    map.setFilter('boundaries-fill', ['in', 'id', ...boundaryIds])
                 }
             } else {
                 map.flyTo({ ...southeast })
-                map.setFilter('projects-outline', ['==', 'id', Infinity])
-                map.setFilter('projects-fill', ['==', 'id', Infinity])
-                map.setFilter('states-outline', ['==', 'id', Infinity])
-                map.setFilter('states-fill', ['==', 'id', Infinity])
+                map.setFilter('geojson-outline', ['==', 'id', Infinity])
+                map.setFilter('geojson-fill', ['==', 'id', Infinity])
+                map.setFilter('boundaries-outline', ['==', 'id', Infinity])
+                map.setFilter('boundaries-fill', ['==', 'id', Infinity])
             }
         }
 

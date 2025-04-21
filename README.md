@@ -24,7 +24,7 @@ each project folder, there are 2 required files:
 Each project requires ONE of two optional approaches for providing boundary information:
 
 - `boundary.geojson`: project boundary polygon(s) in GeoJSON geometry format
-- list of states and bounding box in markdown frontmatter (described below)
+- list of `boundary_ids` and bounding box in markdown frontmatter (described below)
 
 The name of the project's folder is used to create a unique identifier for the
 project. The name must be URL friendly.
@@ -41,7 +41,7 @@ The frontmatter is composed of the following sections:
 title: '<project title, in quotes>'
 latitude: <project representative point latitude>
 longitude: <project representative point longitude>
-states: <optional: array of states in quoted array, e.g., ["AL", "NC"] >
+boundary_ids: <optional: array of boundary IDs in quoted array, e.g., ["AL", "NC", "secas"] >
 bounds: <optional: array of bounds in [xmin, ymin, xmax, ymax] order>
 date: <project date>
 location: '<location description used for internal data tracking, in quotes>'
@@ -57,21 +57,27 @@ The photo caption follows this general convention, and must include the words
 "<text description of photo>. Photo: <photo source name or copyright holder and any notes about license / use with permission>."
 ```
 
-If the project boundary is based on one or more states, those can be referenced
-directly by providing state abbreviations in a list. For example:
+If the project boundary is based on one or more boundaries in the tileset, those
+can be referenced directly by providing those Ids in a list. For example:
 
 ```markdown
-states: ["AL", "MS"]
+boundary_ids: ["AL", "MS"]
 ```
 
 In this case, omit the `boundary.json` file.
 
-When providing a list of states, the `bounds` entry is required in the
+When providing a list of `boundary_ids`, the `bounds` entry is required in the
 frontmatter in order for the map to zoom to the extent of that project.
 
-NOTE: this is intended for projects that are the full extent of the states; it is
-not intended to represent projects that have smaller boundaries _within_ those
-states.
+NOTE: this is intended for projects that are the full extent of states or
+pre-tiled boundaries; it is not intended to represent projects that have smaller
+boundaries _within_ those states.
+
+Available boundary IDs in the tileset include:
+
+- `secas`: the outer SECAS analysis boundary
+- states by 2-letter abbreviation, e.g., `NC`
+- other boundaries specifically added to the tileset, e.g., `military`
 
 ### Project photo
 
@@ -82,7 +88,9 @@ size by 10-15%.
 
 ### Project boundary (OPTIONAL)
 
-This file is omitted if states are listed instead.
+This file can be omitted if using `boundary_ids` to refer to one or more features
+in the tileset. Steps for creating the boundary tileset are described in
+[analysis/prep/README.md](analysis/prep/README.md).
 
 The project boundary polygon(s) should be simplified to the degree possible
 using [mapshaper](https://mapshaper.org/). Use mapshaper to specify the

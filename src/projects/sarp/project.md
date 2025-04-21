@@ -3,6 +3,8 @@ id: sarp
 title: 'SECAS integrates data and priorities with the Southeast Aquatic Resources Partnership'
 latitude: 37.995
 longitude: -80.976
+boundary_ids: ['secas']
+bounds: [-106.64569497, 17.63478139, -64.44293322, 40.63868947]
 date: 08/13/2024
 location: 'point - Babcock State Park on Google Maps; polygon - SARP state boundaries'
 photo_caption: 'Glade Creek Grist Mill in Babcock State Park, WV. Photo: Jim Liestman/Flickr, CC BY-NC-ND 2.0.'

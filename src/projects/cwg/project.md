@@ -3,7 +3,7 @@ id: cwg
 title: 'The Blueprint supports state coastal wetlands grant proposals'
 latitude: 34.136
 longitude: -78.569
-states: ['GA', 'NC', 'SC']
+boundary_ids: ['GA', 'NC', 'SC']
 bounds: [-85.605165, 30.355757, -75.400119, 36.588137]
 date: 08/13/2024
 location: 'point - in Waccamaw River Partnership tract; polygon - NC, SC, GA boundaries'

@@ -3,7 +3,7 @@ id: mli
 title: 'SECAS integrates with the Midwest Landscape Initiative across regional boundaries'
 latitude: 37.582
 longitude: -83.407
-states: ['KY', 'MO']
+boundary_ids: ['KY', 'MO']
 bounds: [-95.774704, 35.995685, -81.964788, 40.61364]
 date: 08/13/2024
 location: 'point - in Daniel Boone NF; polygon - MO and KY boundaries'

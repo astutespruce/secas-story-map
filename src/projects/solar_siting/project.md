@@ -3,7 +3,7 @@ id: solar_siting
 title: 'The Blueprint informs energy siting in Georgia, South Carolina, Mississippi, and beyond'
 latitude: 31.42
 longitude: -84.838
-states: ['GA', 'MS', 'SC']
+boundary_ids: ['GA', 'MS', 'SC']
 bounds: [-91.655009, 30.139845, -78.499301, 35.215485]
 date: 03/04/2025
 location: 'point - Bancroft Station Ln on Google Maps, GA; polygon - SC, GA, MS boundary'

@@ -2,8 +2,9 @@ from pathlib import Path
 import subprocess
 
 import geopandas as gp
+import pandas as pd
 
-data_dir = Path("data")
+data_dir = Path("data/boundaries")
 tmp_dir = Path("/tmp")
 out_dir = Path("static")
 
@@ -30,47 +31,52 @@ SECAS_STATES = [
     "WV",
 ]
 
-tilesets = []
+### Load boundary and states
+bnd = (
+    gp.read_file(data_dir / "se_boundary.fgb", columns=["geometry"], engine="pyogrio")
+    .to_crs("EPSG:4326")
+    .explode(ignore_index=True)
+)
+bnd["id"] = "secas"
 
-### Create tiles for SECAS boundary
-df = gp.read_file(
-    data_dir / "boundaries/se_boundary.fgb", columns=["geometry"], engine="pyogrio"
-).to_crs("EPSG:4326")
+state_list = ",".join(f"'{s}'" for s in SECAS_STATES)
+states = (
+    gp.read_file(
+        data_dir / "states.fgb",
+        columns=["id", "geometry"],
+        where=f"id in ({state_list})",
+        engine="pyogrio",
+    )
+    .to_crs("EPSG:4326")
+    .explode(ignore_index=True)
+)
 
-infilename = tmp_dir / "se_boundary.fgb"
+df = pd.concat([bnd, states], ignore_index=True)
+
+### Load other features
+# NOTE: add each dataset here and assign or read ID
+
+military = (
+    gp.read_file(
+        data_dir / "military.fgb", columns=[], use_arrow=True, engine="pyogrio"
+    )
+    .to_crs("EPSG:4326")
+    .explode(ignore_index=True)
+)
+military["id"] = "military"
+
+# merge all
+df = pd.concat([df, military], ignore_index=True)
+
+
+### Create tiles
+infilename = tmp_dir / "boundaries.fgb"
 df.to_file(infilename)
-outfilename = tmp_dir / "boundary.mbtiles"
-tilesets.append(outfilename)
+outfilename = out_dir / "boundaries.pmtiles"
 ret = subprocess.run(
-    ["tippecanoe", "-f", "-pg"]
-    + ["-l", "boundary"]
+    ["tippecanoe", "-f", "-pg", "--no-simplification-of-shared-nodes"]
+    + ["-l", "boundaries"]
     + ["-Z", str(MINZOOM), "-z", str(MAXZOOM)]
     + ["-o", f"{str(outfilename)}", str(infilename)]
-)
-ret.check_returncode()
-
-### Create tiles for SECAS states
-df = gp.read_file(
-    data_dir / "boundaries/states.fgb", columns=["id", "geometry"]
-).to_crs("EPSG:4326")
-df = df.loc[df.id.isin(SECAS_STATES)]
-
-infilename = tmp_dir / "states.fgb"
-df.to_file(infilename)
-outfilename = tmp_dir / "states.mbtiles"
-tilesets.append(outfilename)
-ret = subprocess.run(
-    ["tippecanoe", "-f", "-pg", "--hilbert"]
-    + ["-l", "states"]
-    + ["-Z", str(MINZOOM), "-z", str(MAXZOOM)]
-    + ["-o", f"{str(outfilename)}", str(infilename)]
-)
-ret.check_returncode()
-
-
-### Join tiles
-outfilename = out_dir / "tiles.pmtiles"
-ret = subprocess.run(
-    ["tile-join", "-f", "-pg", "-o", f"{str(outfilename)}"] + [str(t) for t in tilesets]
 )
 ret.check_returncode()

@@ -3,7 +3,7 @@ id: swaps
 title: 'State fish and wildlife agencies use the Blueprint to inform their Wildlife Action Plans'
 latitude: 31.476
 longitude: -92.999
-states: ['AL', 'AR', 'GA', 'KY', 'LA', 'MS', 'NC', 'OK', 'PR', 'SC', 'TN', 'VA', 'VI']
+boundary_ids: ['AL', 'AR', 'GA', 'KY', 'LA', 'MS', 'NC', 'OK', 'PR', 'SC', 'TN', 'VA', 'VI']
 bounds: [-103.002413, 17.623468, -64.512674, 39.466012]
 date: 03/03/2025
 location: 'point - Longleaf Vista Rec Area on Google Maps; polygon - SWAP state boundaries'
