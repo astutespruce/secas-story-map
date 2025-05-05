@@ -1,3 +1,4 @@
+import { base } from '$app/paths'
 import type { StyleSpecification } from 'mapbox-gl'
 
 export const bounds: [number, number, number, number] = [-106.64569497, 17.63478139, -64.44293322, 40.63868947]
@@ -7,7 +8,7 @@ export const style: StyleSpecification = {
     sources: {
         boundaries: {
             type: 'pmtiles',
-            url: '/boundaries.pmtiles',
+            url: `${base}/boundaries.pmtiles`,
         },
         geojson: {
             type: 'geojson',

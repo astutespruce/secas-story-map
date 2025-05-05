@@ -24,9 +24,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Log env
-        run: echo $DEPLOY_PATH
-
       - name: Checkout code
         uses: actions/checkout@v4
 
