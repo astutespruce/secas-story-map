@@ -35,6 +35,7 @@
 
 <svelte:head>
     <title>SECAS Conservation Projects</title>
+    <meta name="title" content="Southeast Conservation Adaptation Strategy Projects" />
     <meta name="description" content="A story map of conservation projects." />
 </svelte:head>
 
