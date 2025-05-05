@@ -9,6 +9,7 @@ env:
   # NOTE: this is only set when using Github pages URL, not a separate stand-alone
   # domain name pointing to built assets.  This is not set in main repo.
   DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+  PUBLIC_MAPBOX_TOKEN: ${{ secrets.PUBLIC_MAPBOX_TOKEN }}
 
 permissions:
   contents: read
@@ -23,6 +24,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Log env
+        run: echo $DEPLOY_PATH
+
       - name: Checkout code
         uses: actions/checkout@v4
 
