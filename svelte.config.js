@@ -4,14 +4,14 @@ import { mdsvex } from 'mdsvex'
 import rehypeExternalLinks from 'rehype-external-links'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
-
 const config = {
     extensions: ['.svelte', '.md'],
-    preprocess: [vitePreprocess(),
+    preprocess: [
+        vitePreprocess(),
         mdsvex({
             extensions: ['.md'],
             remarkPlugins: [enhancedImages],
-            rehypePlugins: [[rehypeExternalLinks, {target: '_blank'}]]
+            rehypePlugins: [[rehypeExternalLinks, { target: '_blank' }]],
         }),
     ],
 
@@ -23,9 +23,13 @@ const config = {
             precompress: false,
             strict: true,
         }),
+        paths: {
+            // set proper path on github pages if deploying to path
+            base: process.env.DEPLOY_PATH || '',
+        },
         alias: {
-            $projects: 'src/projects'
-        }
+            $projects: 'src/projects',
+        },
     },
 }
 

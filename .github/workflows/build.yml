@@ -2,7 +2,13 @@ name: Build and deploy to Github pages
 
 on:
   push:
-    branches: [main, migrate_to_svelte]
+    # TODO: limit to master
+    branches: [master, migrate_to_svelte]
+
+env:
+  # NOTE: this is only set when using Github pages URL, not a separate stand-alone
+  # domain name pointing to built assets.  This is not set in main repo.
+  DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
 
 permissions:
   contents: read
