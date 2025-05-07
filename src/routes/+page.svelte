@@ -10,6 +10,8 @@
     const { data } = $props()
     const { projects, projectIndex } = data
 
+    let sidebarNode: Element
+
     let selectedProject: Project | null = $state(
         window.location.hash ? projectIndex[window.location.hash.slice(1)] : null
     )
@@ -30,6 +32,11 @@
     $effect(() => {
         // when hash updates, set project
         setProject(hash ? hash.slice(1) : null)
+
+        // scroll sidebar to top on change of content
+        if (sidebarNode) {
+            sidebarNode.scrollTo({ top: 0, behavior: 'auto' })
+        }
     })
 </script>
 
@@ -39,19 +46,16 @@
     <meta name="description" content="A story map of conservation projects." />
 </svelte:head>
 
-<main class="relative flex h-full w-full flex-col gap-0 overflow-hidden">
-    <!-- add project list first so it shows up earlier in reading list, and then use CSS to put at bottom -->
-    {#if !selectedProject}
-        <ProjectList {projects} />
-    {/if}
-
-    <div class="order-0 relative flex h-full flex-auto gap-0">
+<main class="relative flex h-full w-full gap-0">
+    <div
+        class="z-[100] w-[440px] flex-none overflow-y-auto border-r-2 border-zinc-200 bg-white"
+        bind:this={sidebarNode}
+    >
         {#if selectedProject}
-            <div class="z-[100] w-[440px] flex-none overflow-y-auto border-r-2 border-zinc-400 bg-white">
-                <ProjectDetails {...selectedProject} onClose={closeProject} />
-            </div>
+            <ProjectDetails {...selectedProject} onClose={closeProject} />
+        {:else}
+            <ProjectList {projects} />
         {/if}
-
-        <Map {projects} {selectedProject} onMarkerClick={openProject} />
     </div>
+    <Map {projects} {selectedProject} onMarkerClick={openProject} />
 </main>

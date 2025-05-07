@@ -31,4 +31,6 @@ export type Project = {
 
     // from associated boundary.json (OPTIONAL)
     boundary?: string
+
+    photo_position?: string // top, center, bottom
 }

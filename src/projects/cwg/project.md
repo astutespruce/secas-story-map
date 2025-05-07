@@ -8,6 +8,7 @@ bounds: [-85.605165, 30.355757, -75.400119, 36.588137]
 date: 08/13/2024
 location: 'point - in Waccamaw River Partnership tract; polygon - NC, SC, GA boundaries'
 photo_caption: 'Waccamaw River Partnership Tract. Photo: Christine Ellis, Winyah Rivers Alliance, used with permission.'
+photo_position: 'bottom'
 
 photo_url: 'https://winyahrivers.org/winyah-rivers-alliance/'
 ---

@@ -38,15 +38,16 @@ The frontmatter is composed of the following sections:
 
 ```markdown
 ---
-title: '<project title, in quotes>'
+title: "<project title, in quotes>"
 latitude: <project representative point latitude>
 longitude: <project representative point longitude>
 boundary_ids: <optional: array of boundary IDs in quoted array, e.g., ["AL", "NC", "secas"] >
 bounds: <optional: array of bounds in [xmin, ymin, xmax, ymax] order>
 date: <project date>
-location: '<location description used for internal data tracking, in quotes>'
-photo_caption: '<photo caption text, in quotes; see format below>'
-photo_url: '<optional: photo URL, in quotes>'
+location: "<location description used for internal data tracking, in quotes>"
+photo_caption: "<photo caption text, in quotes; see format below>"
+photo_url: "<optional: photo URL, in quotes>"
+photo_position: "<optional: one of: top, center, bottom>"
 ---
 ```
 
@@ -56,6 +57,10 @@ The photo caption follows this general convention, and must include the words
 ```
 "<text description of photo>. Photo: <photo source name or copyright holder and any notes about license / use with permission>."
 ```
+
+The photo position determines the position of the photo when displayed as a narrow
+slice. `"top"` shows the top of the photo, `"center"` shows the center, and
+`"bottom"` shows the bottom. The default is `"center"`.
 
 If the project boundary is based on one or more boundaries in the tileset, those
 can be referenced directly by providing those Ids in a list. For example:
