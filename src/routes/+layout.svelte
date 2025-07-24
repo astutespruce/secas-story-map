@@ -12,15 +12,11 @@
 <svelte:head>
     <link rel="preload" as="font" type="font/woff2" href={raleway} crossorigin="anonymous" />
     <link rel="preload" as="font" type="font/woff2" href={sourceSansPro} crossorigin="anonymous" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64x64.png" />
-    <link rel="icon" type="image/svg" href="/favicon.svg" />
 </svelte:head>
 
 <Analytics />
 
-<div class="flex flex-col h-full w-full overflow-none">
+<div class="overflow-none flex h-full w-full flex-col">
     <Header />
 
     <div class="h-full w-full flex-auto overflow-auto">
