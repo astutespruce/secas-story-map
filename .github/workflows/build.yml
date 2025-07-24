@@ -2,7 +2,7 @@ name: Build and deploy to Github pages
 
 on:
   push:
-    branches: [master]
+    branches: [master, v2-demo]
 
 env:
   # NOTE: DEPLOY_PATH is only set when using Github pages URL that includes a
