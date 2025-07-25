@@ -234,9 +234,9 @@ it is URL-friendly.
 
 In this folder, add:
 
-- banner.jpg
-- boundary.json
-- project.md
+- `banner.jpg`
+- `boundary.json`
+- `project.md`
 
 as described above.
 
