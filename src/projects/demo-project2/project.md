@@ -1,6 +1,6 @@
 ---
 id: demo-project2
-title: 'DEMO project 2'
+title: 'Demo project 2'
 latitude: 35.847
 longitude: -81.826
 date: 07/24/2025
@@ -10,5 +10,7 @@ photo_url: 'https://unsplash.com/photos/a-scenic-view-of-a-mountain-range-in-the
 ---
 
 This is another demo project!
+
+This is a typo fix!
 
 This is an edit of this file.
