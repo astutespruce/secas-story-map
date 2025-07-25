@@ -1,0 +1,95 @@
+@import '@fontsource/source-sans-pro/400.css';
+@import '@fontsource/source-sans-pro/400-italic.css';
+@import '@fontsource/source-sans-pro/700.css';
+@import '@fontsource/raleway/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --primary: 240 5.9% 10%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 240 5.9% 10%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+        --destructive: 0 72.2% 50.6%;
+        --destructive-foreground: 0 0% 98%;
+        --ring: 240 10% 3.9%;
+        --radius: 0.5rem;
+        --sidebar-background: 0 0% 98%;
+        --sidebar-foreground: 240 5.3% 26.1%;
+        --sidebar-primary: 240 5.9% 10%;
+        --sidebar-primary-foreground: 0 0% 98%;
+        --sidebar-accent: 240 4.8% 95.9%;
+        --sidebar-accent-foreground: 240 5.9% 10%;
+        --sidebar-border: 220 13% 91%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
+    }
+
+    * {
+        @apply border-border;
+    }
+
+    html {
+        font-family: 'Source Sans Pro', sans-serif;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 700;
+    }
+
+    h1 {
+        @apply text-5xl font-bold md:text-6xl lg:text-7xl;
+    }
+    h2 {
+        @apply text-4xl font-bold md:text-5xl;
+    }
+    h3 {
+        @apply text-3xl font-bold md:text-4xl;
+    }
+    h4 {
+        @apply text-2xl font-bold;
+    }
+
+    a {
+        @apply text-blue-700 visited:text-purple-600;
+        &:hover {
+            @apply underline;
+        }
+    }
+
+    .markdown-content {
+        p  {
+            margin-top: 1rem;
+            @apply text-lg leading-snug;
+        }
+    }
+
+}

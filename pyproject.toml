@@ -1,0 +1,20 @@
+[project]
+name = "secas-story-map"
+version = "2.0.0"
+description = "SECAS Conservation Projects"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.12"
+dependencies = [
+    "geopandas",
+    "pandas",
+    "pyarrow",
+    "pyogrio",
+    "ruff",
+    "shapely",
+    "tqdm",
+]
+
+
+[tool.setuptools.packages.find]
+include = ["analysis"]
